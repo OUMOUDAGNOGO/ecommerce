@@ -13,6 +13,12 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function index()
+    {
+        $client=Clients::all();
+        return view('client.index',compact('client'));
+    }
+
     public function ViewForm()
     {
         // $client=Clients::all();
@@ -71,7 +77,8 @@ class ClientController extends Controller
 
     public function show($id)
     {
-        //
+        $client=Clients::findOrFail($id);
+        return view('client.show',compact('client'));
     }
 
     /**
@@ -82,7 +89,8 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client=Clients::findOrFail($id);
+        return view('client.edit',compact('client'));
     }
 
     /**
@@ -94,7 +102,18 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nom' => ['required', 'string', "max:200"],
+            'prenom' => ['required', 'string', "max:200"],
+            'email'=>['required','string',"max:250"],
+            'password'=>['required','string',"max:250"],
+             
+            
+        ]);
+    
+        Clients::whereId($id)->update($validatedData);
+    
+        return redirect('/clients')->with('success', 'client mise à jour avec succèss');
     }
 
     /**
@@ -105,6 +124,9 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Clients::findOrFail($id);
+        $client->delete();
+    
+        return redirect('/clients')->with('success', 'client supprimer avec succèss');
     }
 }

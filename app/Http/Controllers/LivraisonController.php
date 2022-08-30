@@ -16,7 +16,9 @@ class LivraisonController extends Controller
      */
     public function index()
     {
-        //
+        $livraison= livraison::all();
+       
+        return view('livraison.index', compact('livraison'));
     }
 
     /**
@@ -42,7 +44,8 @@ class LivraisonController extends Controller
     public function store(Request $request)
     {
         $verification = $request->validate(
-            [    'nom_livreur'=>['required','string','max:1000'],
+            [    'nom_livreur'=>['required','string','max:250'],
+                  'date_livraison'=>['required', 'string', "max:250"], 
                 'commandeId'=> ['required', 'string', "max:250"],
                 
                
@@ -64,6 +67,7 @@ class LivraisonController extends Controller
 
                [  
                    'nom_livreur'=>$request['nom_livreur'],
+                   'date_livraison'=>$request['date_livraison'],
                    'commandeId'=>  $request['commandeId'],
                    'userId' => $user->id,
                  
@@ -82,7 +86,8 @@ class LivraisonController extends Controller
      */
     public function show($id)
     {
-        //
+        $livraison=livraison::findOrFail($id);
+        return view('livraison.show',compact('livraison'));
     }
 
     /**
@@ -93,7 +98,8 @@ class LivraisonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $livraison=livraison::findOrFail($id);
+        return view('livraison.edit',compact('livraison'));
     }
 
     /**
@@ -105,7 +111,17 @@ class LivraisonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nom_livreur' => ['required', 'string', "max:200"],
+            'date_livraison' => ['required', 'string', "max:200"],
+            
+             
+            
+        ]);
+    
+        livraison::whereId($id)->update($validatedData);
+    
+        return redirect('/livraisons')->with('success', 'livraison mise à jour avec succèss');
     }
 
     /**
@@ -116,6 +132,9 @@ class LivraisonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $livraison = livraison::findOrFail($id);
+        $livraison->delete();
+    
+        return redirect('/livraisons')->with('success', 'livraison supprimer avec succèss');
     }
 }

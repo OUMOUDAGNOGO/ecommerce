@@ -15,6 +15,15 @@ class BoutiqueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function index()
+    {
+        
+        $boutique = boutiques::all();
+        return view('boutique.index' ,compact('boutique'));
+    }
+
+
     public function ViewForm()
     {
         $typeboutique=type_boutique::all();
@@ -84,7 +93,8 @@ class BoutiqueController extends Controller
      */
     public function show($id)
     {
-        //
+        $boutique = boutiques::findOrFail($id);
+        return view('Boutique.show', compact('boutique'));
     }
 
     /**
@@ -95,7 +105,8 @@ class BoutiqueController extends Controller
      */
     public function edit($id)
     {
-        //
+        $boutique = boutiques::findOrFail($id);
+        return view('Boutique.edit', compact('boutique'));
     }
 
     /**
@@ -107,7 +118,19 @@ class BoutiqueController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $validatedData = $request->validate([
+            'nom_complet' => ['required', 'string', "max:200"],
+            'nom_boutique' => ['required', 'string', "max:200"],
+            'adresse_boutique'=>['required','string',"max:250"],
+            'telephone_boutique'=>['required','string',"max:250"],
+             'email'=>['required','string',"max:250"],
+            
+        ]);
+    
+        boutiques::whereId($id)->update($validatedData);
+    
+        return redirect('/boutiques')->with('success', 'boutique mise à jour avec succèss');
     }
 
     /**
@@ -118,6 +141,9 @@ class BoutiqueController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $boutique = boutiques::findOrFail($id);
+        $boutique->delete();
+    
+        return redirect('/boutiques')->with('success', 'boutique supprimer avec succèss');
     }
 }

@@ -1,9 +1,31 @@
+@extends('boutique.dashboutique')
+@section('adja')
 
+<style>
+.container{
+    margin-top: 10%;
+    margin-left: -5%;
+}
+
+.card{
+    height: 100%;
+}
+
+.btn{
+    margin-bottom: 5%;
+    margin-left: 25%;
+}
+
+.card-header{
+    font-weight: bold;
+}
+
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Ajouter categorie') }}</div>
+                <div class="card-header" style="background-color: #7f3f0a; color:white; text-align:center;">{{ __('AJOUTER CATEGORIE') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('categories.store') }}">
@@ -15,7 +37,7 @@
                             <label for="nom_categorie" class="col-md-4 col-form-label text-md-end">{{ __('nom_categorie') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nom_categorie" type="text" class="form-control @error('nom_categorie') is-invalid @enderror" name="nom_categorie" value="{{ old('nom_categorie') }}" required autocomplete="nom_categorie" autofocus>
+                                <input id="nom_categorie" type="text" class="form-control @error('nom_categorie') is-invalid @enderror" name="nom_categorie" placeholder="Veuillez entrer le nom ">  
 
                                 @error('nom_categorie')
                                     <span class="invalid-feedback" role="alert">
@@ -31,7 +53,7 @@
                             <label for="abreviation" class="col-md-4 col-form-label text-md-end">{{ __('abreviation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="abreviationi" type="abreviation" class="form-control @error('abreviation') is-invalid @enderror" name="abreviation" value="{{ old('abreviation') }}" required autocomplete="abreviation">
+                                <input id="abreviationi" type="abreviation" class="form-control @error('abreviation') is-invalid @enderror" name="abreviation" placeholder="Veuillez entrer l'abreviation "> 
 
                                 @error('abreviation')
                                     <span class="invalid-feedback" role="alert">
@@ -43,12 +65,13 @@
                         <!-- fin abreviation -->
 
                      <!-- stock -->
-                     <div class="row mb-3">
-                            <label for="stock" class="col-md-4 col-form-label text-md-end">{{ __('stock') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="stock" type="text" class="form-control @error('stock') is-invalid @enderror" name="stock" required autocomplete="stock">
-
+                      <div class="form-group">
+                          <label for="stock">stock</label>
+                                <select name="stock" id="">
+                                  <option value="stock">disponible</option>
+                                  <option value="stock">non disponible</option>
+                                </select>
+                                
                                 @error('stock')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -56,6 +79,9 @@
                                 @enderror
                             </div>
                         </div>
+
+                            
+                        
                      <!-- fin stock -->
                     
                        
@@ -63,7 +89,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Enregistrer') }}
+                                    {{ __('Ajouter') }}
                                 </button>
                             </div>
                         </div>
@@ -73,4 +99,5 @@
         </div>
     </div>
 </div>
+@endsection
 

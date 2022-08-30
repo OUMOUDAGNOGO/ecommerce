@@ -17,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // $categorie = category::all();
-        // return view('categorie.index',compact('categorie'));
+         $categorie = category::all();
+         return view('categorie.index',compact('categorie'));
     }
 
     /**
@@ -82,7 +82,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $categorie = category::findOrFail($id);
+        return view('categorie.show', compact('categorie'));
     }
 
     /**
@@ -93,7 +95,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categorie = category::findOrFail($id);
+        return view('categorie.edit', compact('categorie'));
     }
 
     /**
@@ -105,7 +108,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nom_categorie' => ['required', 'string', "max:200"],
+            'abreviation' => ['required', 'string', "max:200"],
+            'stock'=>['required','string',"max:250"],
+            
+             
+            
+        ]);
+    
+        category::whereId($id)->update($validatedData);
+    
+        return redirect('/categories')->with('success', 'categorie mise à jour avec succèss');
     }
 
     /**
@@ -116,6 +130,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categorie = category::findOrFail($id);
+        $categorie->delete();
+    
+        return redirect('/categories')->with('success', 'categorie supprimer avec succèss');
     }
 }

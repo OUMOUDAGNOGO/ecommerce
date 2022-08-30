@@ -16,6 +16,7 @@ class CreateLivraisonsTable extends Migration
         Schema::create('livraisons', function (Blueprint $table) {
             $table->id();
             $table->string('nom_livreur');
+            $table->date('date_livraison');
             $table->unsignedBigInteger('commandeId');
             $table->foreign('commandeId')->references('id')->on('commandes');
             $table->timestamps();

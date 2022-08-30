@@ -29,9 +29,14 @@ Route::post('/admin-create',[\App\Http\Controllers\AdminController::class, 'regi
 Route::get('/Typeboutique-Register', [App\Http\Controllers\Type_boutiqeController::class, 'ViewForm'])->name('typeboutique.formview');
 Route::post('/Typeboutique-create', [App\Http\Controllers\Type_boutiqeController::class, 'registertypeboutique'])->name('typeboutique.create');
 // boutique
+Route::resource('boutiques','BoutiqueController');
+// Route::get('/Boutique-edit', [App\Http\Controllers\BoutiqueController::class, 'edit'])->name('boutique.edit');
+// Route::get('/Boutique-index', [App\Http\Controllers\BoutiqueController::class, 'index'])->name('boutique.index');
 Route::get('/Boutique-Register', [App\Http\Controllers\BoutiqueController::class, 'ViewForm'])->name('boutique.formview');
 Route::post('/Boutique-create', [App\Http\Controllers\BoutiqueController::class, 'registerboutique'])->name('boutique.create');
 // client
+Route::resource('clients','ClientController');
+
 Route::get('/Client-Register', [App\Http\Controllers\ClientController::class, 'ViewForm'])->name('client.formview');
 Route::post('/Client-create', [App\Http\Controllers\ClientController::class, 'registerclient'])->name('client.create');
 

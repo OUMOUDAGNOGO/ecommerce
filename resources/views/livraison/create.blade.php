@@ -15,7 +15,19 @@
                             <div class="col-md-6">
                                 <input id="nom_livreur" type="text" class="form-control @error('nom_livreur') is-invalid @enderror" name="nom_livreur" value="{{ old('nom_livreur') }}" required autocomplete="nom_livreur" autofocus>
 
-                                @error('quantite')
+                                @error('nom_livreur')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row mb-3">
+                            <label for="date_livraison" class="col-md-4 col-form-label text-md-end">{{ __('date_livraison ') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="date_livraison" type="date" class="form-control @error('date_livraison') is-invalid @enderror" name="date_livraison" value="{{ old('date_livraison') }}" required autocomplete="date_livraison" autofocus>
+
+                                @error('date_livraison')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

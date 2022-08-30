@@ -7,6 +7,7 @@ use App\Models\commande;
 use App\Models\Produit;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommandeController extends Controller
 {
@@ -76,6 +77,13 @@ class CommandeController extends Controller
               return redirect('/commandes')->with('succès');
             }
     }
+
+
+    public function clientcommande()[
+        $user=Auth::user();
+        $commande=commande::where('clientid',$userId)->get();
+        
+    ]
     /**
      * Display the specified resource.
      *

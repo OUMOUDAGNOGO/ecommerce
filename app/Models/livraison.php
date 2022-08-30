@@ -10,6 +10,7 @@ class livraison extends Model
     use HasFactory;
     protected $fillable =[
         'nom_livreur',
+        'date_livraison',
         'commandeId',
     ];
 }

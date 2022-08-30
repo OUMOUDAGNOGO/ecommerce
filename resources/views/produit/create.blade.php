@@ -1,9 +1,32 @@
+@extends('boutique.dashboutique')
+@section('adja')
 
+
+<style>
+    .container{
+        margin-top: 5%;
+        margin-left: -5%;
+    }
+    #retour{
+        margin-left: 70%;
+        margin-top: 2%;
+    } 
+    .btn{
+        margin-left: 30%;
+    }
+
+    .card-header{
+        text-align: center;
+        background-color: #7f3f0a;
+        color: white;
+        font-weight: bold;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card">
-                <div class="card-header">{{ __('ajouter produit') }}</div>
+                <div class="card-header">{{ __('AJOUTER PRODUIT') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('produits.store') }}">
@@ -97,14 +120,18 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Enregistrer') }}
+                                    {{ __('Ajouter') }}
                                 </button>
                             </div>
                         </div>
+                        
                     </form>
+                   
                 </div>
             </div>
         </div>
     </div>
+    <a href="{{url('produits')}}"  id="retour"class="btn btn-primary">Retour</a>
 </div>
+@endsection
 

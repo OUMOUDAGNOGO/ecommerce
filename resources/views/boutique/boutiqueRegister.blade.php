@@ -1,11 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+ <style>
+    .body{
+        background-image: url("{{asset('images/images')}}");
+    }
+ </style>
+<div class="body">
+  <div class="container">
+     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Inscription Boutique') }}</div>
+                <div class="card-header" style="background-color: #7f3f0a; color:white; text-align:center">{{ __('INSCRIPTION BOUTIQUE') }}</div>
 
                 <div class="card-body">
                     <form method="post" action="{{ route('boutique.create')}}">
@@ -120,5 +126,6 @@
             </div>
         </div>
     </div>
+ </div>
 </div>
 @endsection
