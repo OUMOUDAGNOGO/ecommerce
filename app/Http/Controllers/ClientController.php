@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clients;
+use App\Models\type_boutique;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,16 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function dashbord()
+    // {
+    //    $type_boutique=type_boutique::all();
+    //     return view('client.dashclient',compact('client','type_boutique
+    //     '));
+    // }
     public function index()
     {
         $client=Clients::all();
-        return view('client.index',compact('client'));
+        return view('client.index',compact('client',));
     }
 
     public function ViewForm()

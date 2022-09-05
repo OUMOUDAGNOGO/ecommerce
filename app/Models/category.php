@@ -11,7 +11,11 @@ class category extends Model
     protected $fillable = [
         'nom_categorie',
         'abreviation',
-        'stock',
+       
         'userId',
     ];
+    public function produit(){
+        return $this->hasMany(Produit::class, 'produitId');
+    }
+
 }

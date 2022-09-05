@@ -1,3 +1,6 @@
+@extends('layouts.boutique')
+@section('content')
+
 <style>
   .uper {
     margin-top: 40px;
@@ -24,6 +27,9 @@
     margin-left: 40%;
     color: white;
     font-weight: bold;
+  }
+  .card-header{
+    background-color:#7f3f0a;
   }
 </style>
 <div class="card uper">
@@ -58,3 +64,4 @@
       </form>
   </div>
 </div>
+@endsection

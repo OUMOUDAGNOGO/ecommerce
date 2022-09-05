@@ -1,3 +1,11 @@
+@extends('layouts.boutique')
+@section('content')
+<style>
+    .btn{
+        margin-left: 40%;
+    }
+</style>
+
 <div class="container py-3">
     <main>
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
@@ -10,10 +18,15 @@
                         <ul class="list-unstyled mt-3 mb-4">
                         <li>Nom livreur : {{$livraison->nom_livreur}}</li>
                         <li>date livraison: {{$livraison->date_livraison}}</li>
+                       
                         
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <a href="{{url('livraisons')}}" class="btn btn-primary">Retour</a>
+    </main>
+    
+</div>
+    <a href="{{url('livraisons')}}" class="btn btn-primary">Retour</a>
+@endsection

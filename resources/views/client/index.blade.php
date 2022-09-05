@@ -1,4 +1,5 @@
-
+@extends('layouts.boutique')
+@section('content')
 <div class="uper">
 
 @if(session()->get('success'))
@@ -59,4 +60,4 @@
                 </div>
                 </div>
 <!-- fin  -->
-
+@endsection

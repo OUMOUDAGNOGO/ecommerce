@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\category;
+use App\Models\commande;
+use App\Models\livraison;
 use App\Models\User;
 use App\Models\Produit;
 
@@ -18,6 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
          $categorie = category::all();
+        
          return view('categorie.index',compact('categorie'));
     }
 
@@ -28,8 +31,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        // $categorie = category::all();
-        return view('categorie.create');
+        $produit=Produit::count();
+        $categorie=category::count();
+        $commande=commande::count();
+        $livraison=livraison::count();
+        $categorie = category::all();
+        return view('categorie.create',compact('produit','categorie','commande','livraison'));
     }
 
     /**

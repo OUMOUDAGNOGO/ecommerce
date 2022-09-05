@@ -122,7 +122,7 @@ class BoutiqueController extends Controller
         $validatedData = $request->validate([
             'nom_complet' => ['required', 'string', "max:200"],
             'nom_boutique' => ['required', 'string', "max:200"],
-            'adresse_boutique'=>['required','string',"max:250"],
+          
             'telephone_boutique'=>['required','string',"max:250"],
              'email'=>['required','string',"max:250"],
             

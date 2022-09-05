@@ -1,5 +1,5 @@
-@extends('boutique.dashboutique')
-@section('adja')
+@extends('layouts.boutique')
+@section('content')
 <div class="container py-3">
     <main>
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">

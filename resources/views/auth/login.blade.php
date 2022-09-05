@@ -1,11 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+   
+   .container{
+    background-image: url("{{asset('images/ecom_first_section_pic.webp')}};");
+   }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header" style="background-color: #7f3f0a; color:white; text-align:center;font-weight: bold;">{{ __('Login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

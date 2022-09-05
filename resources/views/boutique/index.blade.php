@@ -1,5 +1,5 @@
-@extends('admin.dashadmin')
-@section('contenus')
+@extends('layouts.admindash')
+@section('content')
 
 <style>
    thead{
@@ -18,15 +18,21 @@
     </div><br />
   @endif
 
+  <style>
+   h2{
+      margin-top:-5%;
+   }
+  </style>
 <!-- debut  -->
 
                   <div class="container" style="margin-top: 5%;">
                     <div class="row ">
                         <div class="col-md-9">
                            <div class="white_shd full">
+                           <div class="d-flex justify-content-end "><a type="button" class="btn btn-primary" href="{{route('boutique.formview')}}">AJOUTER UNE BOUTIQUE</a></div>
                               <div class="full graph_head">
                                  <div class="margin-top:20%">
-                                    <h2>Liste des boutiques</h2>
+                                    <h2 >Liste des boutiques</h2>
                                  </div>
                               </div>
                               <div class="table_section padding_infor_info ">

@@ -1,9 +1,20 @@
-
+@extends('layouts.boutique')
+@section('content')
+<style>
+    .container{
+        margin-left: -11%;
+        
+    }
+    form{
+        width: 90%;
+        height: 200%;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('ajouter commande') }}</div>
+                <div class="card-header" style="background-color: #7f3f0a; color:white; text-align:center;">{{ __('AJOUTER COMMANDE') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('commandes.store') }}">
@@ -27,7 +38,7 @@
                             <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('date') }}</label>
 
                             <div class="col-md-6">
-                                <input id="date" type="string" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date" autofocus>
+                                <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date" autofocus>
 
                                 @error('date')
                                     <span class="invalid-feedback" role="alert">
@@ -36,25 +47,47 @@
                                 @enderror
                             </div>
                      </div>
-                       
-                         <!-- fin description -->
-                         <div class="container">
-                             <label class="form-label text-white" style="font-weight: bold;" for="doa">Produit</label>
-                               <select class="form-select" name="produitId" style="color: #41A7A5" aria-label="Default select example" name="produitId">
+
+                     <div class="row mb-3">
+                            <label for="produitId" class="col-md-4 col-form-label text-md-end">{{ __('Produit') }}</label>
+
+                            <div class="col-md-6">
+                                
+                                <select class="form-control @error('produitId') is-invalid @enderror" name="produitId" value="{{ old('produitId') }}" required autocomplete="produitId" autofocus >
                                   @foreach ($produit as $produit )
                                   <option value="{{$produit->id}}">{{$produit->nom}}</option>
                                   @endforeach
                                </select>
-                         </div>
-                        
-                         <div class="container">
-                             <label class="form-label text-white" style="font-weight: bold;" for="doa">client</label>
-                               <select class="form-select" name="clientId" style="color: #41A7A5" aria-label="Default select example" name="clientId">
-                                  @foreach ($client as $client )
+
+
+                                @error('produitId')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                     </div>
+
+
+                     <div class="row mb-3">
+                            <label for="clientId" class="col-md-4 col-form-label text-md-end">{{ __('Client') }}</label>
+
+                            <div class="col-md-6">
+                                
+                                <select class="form-control @error('clientId') is-invalid @enderror" name="clientId" value="{{ old('clientId') }}" required autocomplete="clientId" autofocus >
+                                @foreach ($client as $client )
                                   <option value="{{$client->id}}">{{$client->nom}}</option>
                                   @endforeach
                                </select>
-                         </div>
+
+
+                                @error('clientId')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                     </div>
                        
                        
                         <div class="row mb-0">
@@ -70,4 +103,4 @@
         </div>
     </div>
 </div>
-
+@endsection

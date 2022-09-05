@@ -1,6 +1,5 @@
-@extends('boutique.dashboutique')
-
-@section('adja')
+@extends('layouts.boutique')
+@section('content')
 <style>
   .uper {
     margin-top: 40px;
@@ -58,7 +57,7 @@
     </div><br />
   @endif
     <h2 style="text-align: center;">LISTE DES CATEGORIES</h2>
-  <div class="d-flex justify-content-end mb-4"><a type="button" class="btn btn-primary" href="{{route('categories.index')}}">AJOUTER UNE CATEGORIE</a></div>
+  <div class="d-flex justify-content-end mb-4"><a type="button" class="btn btn-primary" href="{{route('categories.create')}}">AJOUTER UNE CATEGORIE</a></div>
   <table class="table table-bordered table-hover" style="color:black; font-size: 0.8rem;">
 
     <thead>

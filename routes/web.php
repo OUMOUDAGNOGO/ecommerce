@@ -36,7 +36,7 @@ Route::get('/Boutique-Register', [App\Http\Controllers\BoutiqueController::class
 Route::post('/Boutique-create', [App\Http\Controllers\BoutiqueController::class, 'registerboutique'])->name('boutique.create');
 // client
 Route::resource('clients','ClientController');
-
+Route::get('/clientboutique',[App\Http\Controllers\Type_boutiqeController::class,'Recuperation'])->name('clientboutique');
 Route::get('/Client-Register', [App\Http\Controllers\ClientController::class, 'ViewForm'])->name('client.formview');
 Route::post('/Client-create', [App\Http\Controllers\ClientController::class, 'registerclient'])->name('client.create');
 

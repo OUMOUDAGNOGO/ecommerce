@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\category;
 use App\Models\Produit;
+use App\Models\commande;
+use App\Models\livraison;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth ;
 
 class ProduitController extends Controller
 {
@@ -17,8 +20,9 @@ class ProduitController extends Controller
     public function index()
     {
         $produit = Produit::all();
+       
         // dd($produit);
-        return view('produit.index' ,compact('produit'));
+        return view('produit.index' ,compact('produit', ));
     }
 
     /**
@@ -28,8 +32,11 @@ class ProduitController extends Controller
      */
     public function create()
     {
-        $categorie = category::all();
-        return view('produit.create', compact('categorie'));
+        $categorie=category::all();
+        $commande=commande::count();
+        $livraison=livraison::count();
+        $produit = Produit::all();
+        return view('produit.create', compact('produit', 'categorie', 'commande','livraison'));
     }
 
     /**
@@ -41,34 +48,30 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         $verification = $request->validate(
-            [    'image'=>['required','string','max:1000'],
+            [    'image'=>'required||file',
                 'nom_produit'=> ['required', 'string', "max:250"],
                 'type_produit'=> ['required', 'string', "max:250"],
                 'description'=> ['required', 'string', "max:250"],
+                'quantité'=> ['required', 'string', "max:250"],
                 'prix'=> ['required', 'string', "max:250"],
                 
                
             ]
             );
              if ($verification)
-                $user = User ::create(
-                [
-                    'name' =>  $request['nom_produit'],
-                    'email' => $request['type_produit'],
-                    'password' =>bcrypt($request['password']),
-                    'statut' => 'Produits',
-                ]
-             );
-    
-             if ($user)
-            {
+                $user = Auth::user();
+                $fileName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('produits/image'), $fileName);
+
+               
               $produit=Produit::create(
 
                [  
-                   'image'=>$request['image'],
+                   'image'=>$fileName,
                    'nom_produit'=>  $request['nom_produit'],
                    'type_produit'=>  $request['type_produit'],
                    'description'=>  $request['description'],
+                   'quantité'=>  $request['quantité'],
                    'categorieId'=>  $request['categorieId'],
                    'prix' => $request['prix'],
                    'userId' => $user->id,
@@ -78,7 +81,7 @@ class ProduitController extends Controller
               );
               return redirect('/produits')->with('succès');
             }
-    }
+    
     
 
     /**
@@ -118,6 +121,7 @@ class ProduitController extends Controller
             'nom_produit'=> ['required', 'string', "max:250"],
             'type_produit'=> ['required', 'string', "max:250"],
             'description'=> ['required', 'string', "max:250"],
+            'quantité'=> ['required', 'string', "max:250"],
             'prix'=> ['required', 'integer', "max:250"],
             
         ]);

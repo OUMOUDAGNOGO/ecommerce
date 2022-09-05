@@ -1,57 +1,30 @@
-@extends('boutique.dashboutique')
-@section('adja')
-
-
+@extends('layouts.boutique')
+@section('content')
 <style>
     .container{
-        margin-top: 5%;
-        margin-left: -5%;
+        margin-left: -11%;
+        
     }
-    #retour{
-        margin-left: 70%;
-        margin-top: 2%;
-    } 
-    .btn{
-        margin-left: 30%;
-    }
-
-    .card-header{
-        text-align: center;
-        background-color: #7f3f0a;
-        color: white;
-        font-weight: bold;
+    form{
+        width: 90%;
+        height: 200%;
     }
 </style>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-7">
+        <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('AJOUTER PRODUIT') }}</div>
+                <div class="card-header" style="background-color: #7f3f0a; color:white; text-align:center;">{{ __('AJOUTER UN PRODUIT') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('produits.store') }}">
+                    <form method="POST" enctype="multipart/form-data" action="{{ route('produits.store') }}">
                         @csrf
 
-                        <!-- nom_produit -->
                         <div class="row mb-3">
-                            <label for="nom_produit" class="col-md-4 col-form-label text-md-end">{{ __('nom_produit') }}</label>
+                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nom_produit" type="text" class="form-control @error('nom_produit') is-invalid @enderror" name="nom_produit" value="{{ old('nom_produit') }}" required autocomplete="nom_produit" autofocus>
-
-                                @error('nom_produit')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                     </div>
-
-                     <div class="row mb-3">
-                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="image" type="string" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" autofocus>
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" autofocus>
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
@@ -60,14 +33,25 @@
                                 @enderror
                             </div>
                      </div>
-                        <!-- fin nom_produit -->
 
-                        <!-- type_produit -->
-                        <div class="row mb-3">
+                     <div class="row mb-3">
+                            <label for="nom_produit" class="col-md-4 col-form-label text-md-end">{{ __('nom_produit') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nom_produit" type="string" class="form-control @error('nom_produit') is-invalid @enderror" name="nom_produit" value="{{ old('nom_produit') }}" required autocomplete="nom_produit" autofocus>
+
+                                @error('nom_produit')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                     </div>
+                     <div class="row mb-3">
                             <label for="type_produit" class="col-md-4 col-form-label text-md-end">{{ __('type_produit') }}</label>
 
                             <div class="col-md-6">
-                                <input id="type_produit" type="text" class="form-control @error('type_produit') is-invalid @enderror" name="type_produit" value="{{ old('type_produit') }}" required autocomplete="type_produit" autofocus>
+                                <input id="type_produit" type="string" class="form-control @error('type_produit') is-invalid @enderror" name="type_produit" value="{{ old('type_produit') }}" required autocomplete="type_produit" autofocus>
 
                                 @error('type_produit')
                                     <span class="invalid-feedback" role="alert">
@@ -76,14 +60,11 @@
                                 @enderror
                             </div>
                      </div>
-                        <!-- fin type_produit -->
-
-                        <!-- description -->
-                        <div class="row mb-3">
+                     <div class="row mb-3">
                             <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('description') }}</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" autofocus>
+                                <input id="description" type="string" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" autofocus>
 
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -92,21 +73,44 @@
                                 @enderror
                             </div>
                      </div>
-                         <!-- fin description -->
-                         <div class="container">
-                             <label class="form-label text-white" style="font-weight: bold;" for="doa">categorie</label>
-                               <select class="form-select" name="categorieId" style="color: #41A7A5" aria-label="Default select example" name="categorieId">
-                                  @foreach ($categorie as $categorie )
+                     <div class="row mb-3">
+                            <label for="quantité" class="col-md-4 col-form-label text-md-end">{{ __('quantité') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="quantité" type="text" class="form-control @error('quantité') is-invalid @enderror" name="quantité" value="{{ old('quantité') }}" required autocomplete="quantité" autofocus>
+
+                                @error('quantite')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                     </div>
+                     <div class="row mb-3">
+                            <label for="categorieId" class="col-md-4 col-form-label text-md-end">{{ __('Categorie') }}</label>
+
+                            <div class="col-md-6">
+                                
+                                <select class="form-control @error('categorieId') is-invalid @enderror" name="categorieId" value="{{ old('categorieId') }}" required autocomplete="categorieId" autofocus >
+                                @foreach ($categorie as $categorie )
                                   <option value="{{$categorie->id}}">{{$categorie->nom}}</option>
                                   @endforeach
                                </select>
-                         </div>
-                         <!-- prix -->
-                         <div class="row mb-3">
+
+
+                                @error('categorieId')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                     </div>
+                     <div class="row mb-3">
+                            
                             <label for="prix" class="col-md-4 col-form-label text-md-end">{{ __('prix') }}</label>
 
                             <div class="col-md-6">
-                                <input id="prix" type="text" class="form-control @error('prix') is-invalid @enderror" name="prix" value="{{ old('prix') }}" required autocomplete="prix" autofocus>
+                                <input id="prix" type="string" class="form-control @error('prix') is-invalid @enderror" name="prix" value="{{ old('prix') }}" required autocomplete="prix" autofocus>
 
                                 @error('prix')
                                     <span class="invalid-feedback" role="alert">
@@ -114,24 +118,18 @@
                                     </span>
                                 @enderror
                             </div>
-                     </div>
-                         <!-- fin prix -->
-                       
+                    
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Ajouter') }}
+                                    {{ __('Enregistrer') }}
                                 </button>
                             </div>
                         </div>
-                        
                     </form>
-                   
                 </div>
             </div>
         </div>
     </div>
-    <a href="{{url('produits')}}"  id="retour"class="btn btn-primary">Retour</a>
 </div>
 @endsection
-

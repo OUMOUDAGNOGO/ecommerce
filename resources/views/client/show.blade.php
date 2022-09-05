@@ -1,3 +1,5 @@
+@extends('layouts.boutique')
+@section('content')
 <div class="container py-3">
     <main>
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
@@ -16,4 +18,5 @@
                 </div>
             </div>
         </div>
-        <a href="{{url('categories')}}" class="btn btn-primary">Retour</a>
+        <a href="{{url('clients')}}" class="btn btn-primary">Retour</a>
+        @endsection

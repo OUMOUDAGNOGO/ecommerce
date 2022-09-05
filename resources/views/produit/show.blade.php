@@ -25,7 +25,7 @@
    
 </div>
 
-<a href="{{url('Produits')}}" class="btn btn-primary">Retour</a>
+<a href="{{url('produits')}}" class="btn btn-primary">Retour</a>
 
 @endsection
     

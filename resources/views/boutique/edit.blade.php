@@ -44,8 +44,9 @@
       </div><br />
     @endif
 
-      <form method="post" action="{{route('boutiques.update',$boutique->id)}}">
+      <form method="Post" action="{{route('boutiques.update',$boutique->id)}}">
          @csrf
+         @method('patch')
           <div class="form-group">
               <label for="nom_complet">Nom complet</label>
               <input type="text" class="form-control" name="nom_complet" value="{{ $boutique->nom_complet }}"/>
@@ -64,10 +65,7 @@
               <label for="email">Email</label>
               <input type="text" class="form-control" name="email" value="{{ $boutique->email }}"/>
           </div>
-          <div class="form-group">
-              <label for="password">Mot de passe</label>
-              <input type="text" class="form-control" name="password" value="{{ $boutique->password }}"/>
-          </div>
+          
           <button type="submit" class="btn btn-primary">Enregistrer</button>
       </form>
   </div>

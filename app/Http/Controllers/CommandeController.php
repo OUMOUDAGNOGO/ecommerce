@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clients;
 use App\Models\commande;
+use App\Models\livraison;
 use App\Models\Produit;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class CommandeController extends Controller
      */
     public function index()
     {
-        //
+        $commande=commande::all();
+        return view('commande.index', compact('commande')); 
     }
 
     /**
@@ -28,6 +30,7 @@ class CommandeController extends Controller
      */
     public function create()
     {
+        // $commande=commande::all();
         $produit = Produit::all();
         $client=Clients::all();
         return view('commande.create', compact('produit','client'));
@@ -79,11 +82,11 @@ class CommandeController extends Controller
     }
 
 
-    public function clientcommande()[
-        $user=Auth::user();
-        $commande=commande::where('clientid',$userId)->get();
+    // public function clientcommande()[
+    //     $user=Auth::user();
+    //     $commande=commande::where('clientid',$userId)->get();
         
-    ]
+    // ]
     /**
      * Display the specified resource.
      *
@@ -92,7 +95,8 @@ class CommandeController extends Controller
      */
     public function show($id)
     {
-        //
+        $commande=commande::findOrFail($id);
+        return view('commande.show',compact('commande'));
     }
 
     /**
@@ -103,7 +107,8 @@ class CommandeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $commande=commande::findOrFail($id);
+        return view('commande.edit',compact('commande')); 
     }
 
     /**
@@ -115,7 +120,17 @@ class CommandeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'quantité' => ['required', 'string', "max:200"],
+            'date' => ['required', 'string', "max:200"],
+            'produitId'=>['required','string',"max:250"],
+             'clientId'=>['required','string',"max:250"],
+            
+        ]);
+    
+        commande::whereId($id)->update($validatedData);
+    
+        return redirect('/commandes')->with('success', 'commande mise à jour avec succèss');
     }
 
     /**

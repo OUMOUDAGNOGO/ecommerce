@@ -14,6 +14,18 @@ class Type_boutiqeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function Recuperation()
+    // {
+    //     $type_boutique=type_boutique::all();
+        
+    //     return view('client.dashclient',compact('type_boutique'));
+        
+    // }
+
+
+
+
+
     public function index()
     {
         //

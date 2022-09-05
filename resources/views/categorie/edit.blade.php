@@ -1,5 +1,5 @@
-@extends('boutique.dashboutique')
-@section('adja')
+@extends('layouts.boutique')
+@section('content')
 <style>
   .uper {
     margin-top: 40px;
